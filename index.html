@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Theme Engagement Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-G29633FSQS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    const GA_MEASUREMENT_ID = "G-G29633FSQS";
+    const isLocalhost = location.hostname === "localhost" || location.hostname === "127.0.0.1";
+    
+    gtag('js', new Date());
+    // Enable debug mode for localhost
+    if (isLocalhost) {
+      gtag('config', GA_MEASUREMENT_ID, { 'debug_mode': true });
+      console.log("GA4 Debug Mode Enabled (localhost)");
+    } else {
+      gtag('config', GA_MEASUREMENT_ID);
+    }
+  </script>
+
+  <script src="script.js"></script>
+</head>
+
+<body>
+  <body>
+  <div class="container">
+    <h1>User Engagement Demo</h1>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+
+    <!-- Quiz -->
+    <div class="quiz">
+      <h2>Quick Quiz</h2>
+      <p>Which mode do you prefer?</p>
+      <button onclick="submitQuiz('dark')">🌙 Dark Mode</button>
+      <button onclick="submitQuiz('light')">☀️ Light Mode</button>
+    </div>
+
+    <!-- Scrollable Article -->
+    <h2>Sample Article</h2>
+    <article id="article">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nec justo vitae
+        turpis vestibulum malesuada. Integer malesuada turpis ut feugiat sollicitudin.
+        Donec at lectus sed magna iaculis tempus. Aenean vitae turpis id purus venenatis 
+        dictum at nec urna. Curabitur ut fringilla leo. Vestibulum viverra magna non nibh 
+        suscipit, eget tincidunt est egestas. Proin tristique, nulla non facilisis egestas,
+        turpis eros tincidunt sapien, a venenatis turpis magna ut nisi.</p>
+      <p>Scroll to the bottom to trigger an event in GA4. This helps measure article engagement.</p>
+      <p style="margin-top: 500px;">🎉 You reached the end of the article!</p>
+    </article>
+
+    <!-- Feedback Form -->
+    <div class="feedback">
+      <h2>Feedback</h2>
+      <form onsubmit="sendFeedback(event)">
+        <label>What do you think of this demo?</label><br/>
+        <textarea id="feedbackText" rows="3" cols="50"></textarea><br/>
+        <button type="submit">Submit Feedback</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html> 
