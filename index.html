@@ -11,18 +11,9 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-
-    const GA_MEASUREMENT_ID = "G-G29633FSQS";
-    const isLocalhost = location.hostname === "localhost" || location.hostname === "127.0.0.1";
-    
     gtag('js', new Date());
-    // Enable debug mode for localhost
-    if (isLocalhost) {
-      gtag('config', GA_MEASUREMENT_ID, { 'debug_mode': true });
-      console.log("GA4 Debug Mode Enabled (localhost)");
-    } else {
-      gtag('config', GA_MEASUREMENT_ID);
-    }
+
+    gtag('config', 'G-G29633FSQS');
   </script>
 
   <script src="script.js"></script>
