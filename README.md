@@ -4,7 +4,7 @@ A comprehensive study tracking user preferences between dark mode and light mode
 
 ## Live Demo
 
-Visit: [https://yourusername.github.io/engagement/landing.html](https://yourusername.github.io/engagement/landing.html)
+Visit: [https://the-tanq.github.io/engagement/index.html](https://the-tanq.github.io/engagement/index.html)
 
 ## Features
 
