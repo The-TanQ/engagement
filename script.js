@@ -85,11 +85,26 @@ function answerQuestion(questionId, answer) {
 
 // SCROLL TRACKING
 let articleReadTracked = false;
+let scrollDepthTracked = {};
+
 window.addEventListener("scroll", function() {
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
   const scrollTop = window.scrollY;
   const scrollPercent = (scrollTop / docHeight) * 100;
   document.getElementById("scroll-progress-bar").style.width = scrollPercent + "%";
+  
+  // Track scroll depth milestones
+  const thresholds = [25, 50, 75, 100];
+  thresholds.forEach(depth => {
+    if (scrollPercent >= depth && !scrollDepthTracked[depth]) {
+      scrollDepthTracked[depth] = true;
+      gtag('event', 'scroll_depth', {
+        event_category: 'engagement',
+        depth: depth
+      });
+      console.log(`GA Event: scroll_depth - ${depth}%`);
+    }
+  });
   
   const article = document.getElementById("demo-article");
   if (!article) return;
