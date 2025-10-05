@@ -1,134 +1,64 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Theme Engagement Tracker</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theme Preference Study</title>
   <link rel="stylesheet" href="styles.css">
-
+  
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-G29633FSQS"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-G29633FSQS');
   </script>
-
-  <script src="script.js"></script>
 </head>
-
 <body>
-    <!-- Scroll Progress Bar -->
-  <div id="scroll-progress-container" style="position:fixed; top:0; left:0; width:100%; height:6px; background:#e0e0e0; z-index:9999;">
-    <div id="scroll-progress-bar" style="width:0%; height:100%; background:#4caf50; transition: width 0.1s;"></div>
+  <div style="max-width: 600px; margin: 4rem auto; text-align: center; padding: 2rem;">
+    <h1>Welcome to Our Theme Study</h1>
+    <p>Help us understand user preferences by choosing your preferred reading mode.</p>
+    
+    <div style="margin: 3rem 0;">
+      <h2>Choose Your Preferred Theme:</h2>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+        <button onclick="selectTheme('light')" style="padding: 2rem; font-size: 1.2rem; border: 2px solid #333; background: #fff; color: #333; cursor: pointer; border-radius: 8px; min-width: 150px;">
+          ☀️<br>Light Mode
+        </button>
+        <button onclick="selectTheme('dark')" style="padding: 2rem; font-size: 1.2rem; border: 2px solid #333; background: #333; color: #fff; cursor: pointer; border-radius: 8px; min-width: 150px;">
+          🌙<br>Dark Mode
+        </button>
+        <button onclick="selectTheme('auto')" style="padding: 2rem; font-size: 1.2rem; border: 2px solid #333; background: linear-gradient(90deg, #fff 50%, #333 50%); color: #333; cursor: pointer; border-radius: 8px; min-width: 150px;">
+          🔄<br>Auto
+        </button>
+      </div>
+    </div>
+    
+    <p id="selection-message" style="margin-top: 2rem; font-weight: bold;"></p>
   </div>
 
-  <main style="max-width: 800px; margin: 2rem auto; font-family: sans-serif; line-height: 1.7;">
-    <article id="demo-article">
-      <h1>Exploring Dark Mode vs Light Mode</h1>
-      <p>
-        In today’s digital world, users spend hours interacting with websites and apps. 
-        One of the most debated features in user interface design is the choice between 
-        <strong>dark mode</strong> and <strong>light mode</strong>. While some users love the 
-        sleek, modern look of dark themes, others prefer the traditional clarity of light interfaces. 
-        Let’s explore the pros and cons of each.
-      </p>
+  <script>
+    function selectTheme(theme) {
+      gtag('event', 'landing_theme_selection', {
+        event_category: 'engagement',
+        selected_theme: theme,
+        page: 'landing'
+      });
+      console.log('GA Event: landing_theme_selection', { theme: theme });
+      
+      document.getElementById('selection-message').textContent = `You selected ${theme} mode. Redirecting...`;
+      
+      setTimeout(() => {
+        window.location.href = `./index.html?theme=${theme}`;
+      }, 1000);
+    }
 
-      <h2>1. Eye Strain and Comfort</h2>
-      <p>
-        Many users report that dark mode reduces eye strain, especially in low-light environments. 
-        Staring at a bright white screen in a dark room can be harsh, whereas dark mode offers a 
-        more comfortable reading experience. However, in bright sunlight, light mode often proves 
-        superior, providing better visibility and readability.
-      </p>
-      <img src="https://picsum.photos/800/300?random=1" alt="Dark mode example" style="width:100%; margin:1rem 0; border-radius:8px;">
-
-      <h2>2. Battery Life</h2>
-      <p>
-        On OLED and AMOLED screens, dark mode can extend battery life significantly because black 
-        pixels require no backlight. This makes dark mode not just an aesthetic choice but also a 
-        practical one for users who need longer device usage between charges. Light mode, while 
-        consuming more power, can still be more suitable in office or outdoor environments.
-      </p>
-      <img src="https://picsum.photos/800/300?random=2" alt="Battery life graphic" style="width:100%; margin:1rem 0; border-radius:8px;">
-
-      <h2>3. Accessibility and Usability</h2>
-      <p>
-        Accessibility is an important consideration. Some users with vision impairments or 
-        dyslexia may find dark mode difficult to read, while others find it improves clarity. 
-        The best approach is to offer both options, allowing users to choose what works best 
-        for their eyes and environment. Inclusivity improves user satisfaction across the board.
-      </p>
-      <img src="https://picsum.photos/800/300?random=3" alt="Accessibility illustration" style="width:100%; margin:1rem 0; border-radius:8px;">
-
-      <h2>4. Psychological Effects</h2>
-      <p>
-        Colors and contrast affect mood. Dark themes can feel immersive and cinematic, while 
-        light themes often appear more professional and business-oriented. Developers working 
-        late at night may favor dark mode, while professionals reviewing reports might lean 
-        towards light mode for clarity.
-      </p>
-
-      <h2>5. Practical Scenarios</h2>
-      <p>
-        There is no universal “best mode.” For example:
-        <ul>
-          <li>Developers coding at night → Dark Mode</li>
-          <li>Designers working with color accuracy → Light Mode</li>
-          <li>Casual browsing → Personal preference</li>
-          <li>Mobile users conserving battery → Dark Mode</li>
-        </ul>
-      </p>
-
-      <p><strong>Scroll to the end of this article to complete the quiz and leave feedback. When you reach the end, the “article_read_complete” event will be sent to Google Analytics.</strong></p>
-    </article>
-
-    <!-- Quiz Section -->
-    <section id="quiz-section" style="margin-top: 2rem; padding: 1rem; border-top: 2px solid #ccc;">
-      <h2>Interactive Quiz</h2>
-      <div id="quiz-container">
-        <p>Which mode do you prefer for reading articles like this?</p>
-        <button onclick="submitQuiz('dark')" style="margin: 0.5rem; padding: 0.5rem 1rem;">🌙 Dark Mode</button>
-        <button onclick="submitQuiz('light')" style="margin: 0.5rem; padding: 0.5rem 1rem;">☀️ Light Mode</button>
-        <button onclick="submitQuiz('auto')" style="margin: 0.5rem; padding: 0.5rem 1rem;">🔄 Auto (System)</button>
-      </div>
-      <p id="quiz-feedback" style="margin-top: 1rem; font-weight: bold;"></p>
-    </section>
-
-    <!-- Feedback Section -->
-    <section id="feedback-section" style="margin-top: 2rem; padding: 1rem; border-top: 2px solid #ccc;">
-      <h2>We Value Your Feedback</h2>
-      <p>Please share your thoughts about your reading experience.</p>
-
-      <form id="feedback-form">
-        <!-- Multiple-choice questions -->
-        <div>
-          <p>1. How enjoyable was the article?</p>
-          <label><input type="radio" name="q1" value="Very enjoyable"> Very enjoyable</label><br>
-          <label><input type="radio" name="q1" value="Somewhat enjoyable"> Somewhat enjoyable</label><br>
-          <label><input type="radio" name="q1" value="Not enjoyable"> Not enjoyable</label>
-        </div>
-
-        <div style="margin-top:1rem;">
-          <p>2. Was the content length appropriate?</p>
-          <label><input type="radio" name="q2" value="Too long"> Too long</label><br>
-          <label><input type="radio" name="q2" value="Just right"> Just right</label><br>
-          <label><input type="radio" name="q2" value="Too short"> Too short</label>
-        </div>
-
-        <!-- Free-text feedback -->
-        <div style="margin-top:1rem;">
-          <p>3. Additional comments (optional):</p>
-          <textarea name="q3" rows="4" style="width:100%; padding:0.5rem; border-radius:5px;"></textarea>
-        </div>
-
-        <br>
-        <button type="submit">Submit Feedback</button>
-        <p id="feedback-message" style="margin-top: 1rem; font-weight: bold;"></p>
-      </form>
-    </section>
-  </main>
+    // Track page view
+    gtag('event', 'page_view', {
+      page_title: document.title,
+      page_location: window.location.href
+    });
+  </script>
 </body>
-</html> 
+</html>
