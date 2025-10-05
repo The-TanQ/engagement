@@ -28,12 +28,6 @@ Visit: [https://the-tanq.github.io/engagement/index.html](https://the-tanq.githu
 - `feedback_submitted` - Additional feedback
 - `page_view` - Page visits
 
-## Setup
-
-1. Replace `G-G29633FSQS` with your Google Analytics 4 measurement ID
-2. Deploy to GitHub Pages
-3. Set landing.html as your entry point
-
 ## Files
 
 - `landing.html` - Theme selection page
