@@ -86,7 +86,7 @@ function answerQuestion(questionId, answer) {
 // SCROLL TRACKING
 let articleReadTracked = false;
 let scrollDepthTracked = {};
-
+let articleStartTime = null;
 window.addEventListener("scroll", function() {
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
   const scrollTop = window.scrollY;
@@ -105,7 +105,9 @@ window.addEventListener("scroll", function() {
       console.log(`GA Event: scroll_depth - ${depth}%`);
     }
   });
-  
+  if (!articleStartTime && scrollTop > 100) {
+    articleStartTime = Date.now();
+  }
   const article = document.getElementById("demo-article");
   if (!article) return;
   
@@ -118,10 +120,41 @@ window.addEventListener("scroll", function() {
       event_category: 'engagement'
     });
     console.log('GA Event: article_read_complete');
+
+    // Record read duration
+    if (articleStartTime) {
+      const readDuration = Math.round((Date.now() - articleStartTime) / 1000);
+      gtag('event', 'article_read_duration', {
+        event_category: 'engagement',
+        theme: document.body.getAttribute('data-theme'),
+        duration_seconds: readDuration
+      });
+      console.log('GA Event: article_read_duration', { readDuration });
+    }
   }
 });
 
 // INIT
+
+let sessionStartTime;
+
+window.addEventListener('load', () => {
+  sessionStartTime = Date.now();
+});
+
+window.addEventListener('beforeunload', () => {
+  const sessionEndTime = Date.now();
+  const sessionDuration = Math.round((sessionEndTime - sessionStartTime) / 1000);
+  const theme = document.body.getAttribute('data-theme') || 'unknown';
+  gtag('event', 'session_duration', {
+    event_category: 'engagement',
+    theme: theme,
+    duration_seconds: sessionDuration
+  });
+  console.log('GA Event: session_duration', { theme, sessionDuration });
+});
+
+
 document.addEventListener('DOMContentLoaded', () => {
   gtag('event', 'page_view', {
     page_title: document.title,
